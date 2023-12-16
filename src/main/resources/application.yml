@@ -1,0 +1,20 @@
+#jdbc.driver=com.mysql.cj.jdbc.Driver
+#jdbc.url=jdbc:mysql://rm-cn-wwo3iqpck000i2vo.rwlb.rds.aliyuncs.com:3306/top_news
+#jdbc.username=root
+#jdbc.password=Aini131420
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      url: jdbc:mysql://rm-cn-wwo3iqpck000i2vo.rwlb.rds.aliyuncs.com:3306/top_news
+      username: root
+      password: Aini131420
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  configuration:
+    auto-mapping-behavior: full
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+  type-aliases-package: com.phil.pojo
+  mapper-locations: classpath:/mapper/*.xml
