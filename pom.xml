@@ -15,28 +15,23 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <mybatis.version>3.0.1</mybatis.version>
+        <mybatis.version>3.0.0</mybatis.version>
         <druid.version>1.2.18</druid.version>
         <mysql.version>8.0.28</mysql.version>
         <lombok.version>1.18.28</lombok.version>
         <jjwt.version>0.11.2</jjwt.version>
+        <pagehelper.version>5.1.11</pagehelper.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
+
         <!--Web启动器-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <!--Mybatis启动器-->
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>${mybatis.version}</version>
         </dependency>
 
         <!-- 数据库相关配置启动器 jdbctemplate 事务相关-->
@@ -50,6 +45,12 @@
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-3-starter</artifactId>
             <version>${druid.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>3.0.2</version>
         </dependency>
 
         <!-- Mysql数据库驱动类-->
@@ -81,6 +82,12 @@
             <version>${jjwt.version}</version>
         </dependency>
 
+        <!--分页插件-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>${pagehelper.version}</version>
+        </dependency>
     </dependencies>
 
 

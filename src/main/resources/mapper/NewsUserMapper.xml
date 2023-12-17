@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.phil.headline.mapper.NewsUserMapper">
+    <resultMap id="newsUserMap" type="newsUser">
+        <id column="uid" property="uid"></id>
+        <result column="username" property="username"></result>
+        <result column="user_pwd" property="userPwd"></result>
+        <result column="nick_name" property="nickName"></result>
+    </resultMap>
+
+    <select id="selectByUsername" resultMap="newsUserMap">
+        SELECT * FROM news_user
+        WHERE username = #{username}
+    </select>
+    <select id="selectByUserId" resultMap="newsUserMap">
+        SELECT * FROM news_user
+        WHERE uid = #{uid}
+    </select>
+
+    <insert id="addUser">
+        INSERT INTO news_user(username, user_pwd, nick_name)
+        VALUES (#{username}, #{userPwd}, #{nickName})
+    </insert>
+</mapper>

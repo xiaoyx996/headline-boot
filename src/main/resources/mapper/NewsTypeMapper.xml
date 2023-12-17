@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.phil.headline.mapper.NewsTypeMapper">
+    <resultMap id="typeMap" type="newsType">
+        <id column="tid" property="tid"/>
+        <result column="tname" property="tname"/>
+    </resultMap>
+    <select id="selectAll" resultMap="typeMap">
+        select * from news_type
+    </select>
+</mapper>

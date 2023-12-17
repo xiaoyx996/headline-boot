@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.phil.headline.mapper.NewsHeadlineMapper">
+    <resultMap id="headlinePage" type="headlinePageVo">
+        <id column="hid" property="hid"></id>
+        <result column="title" property="title"></result>
+        <result column="type" property="type"></result>
+        <result column="page_views" property="pageViews"></result>
+        <result column="past_hours" property="pastHours"></result>
+        <result column="publisher" property="publisher"></result>
+    </resultMap>
+
+    <resultMap id="headlineDetail" type="headlineDetailVo">
+        <id column="hid" property="hid"></id>
+        <result column="title" property="title"></result>
+        <result column="article" property="article"></result>
+        <result column="type" property="type"></result>
+        <result column="tname" property="typeName"></result>
+        <result column="page_views" property="pageViews"></result>
+        <result column="past_hours" property="pastHours"></result>
+        <result column="publisher" property="publisher"></result>
+        <result column="nick_name" property="author"></result>
+    </resultMap>
+
+    <resultMap id="newsHeadline" type="newsHeadline">
+        <id column="hid" property="hid"></id>
+        <result column="title" property="title"></result>
+        <result column="article" property="article"></result>
+        <result column="type" property="type"></result>
+    </resultMap>
+
+    <!--
+        /*
+        "keyWords":"马斯克", // 搜索标题关键字，可以为""或者null
+        "type":0,           // 新闻类型，0表示所有类型
+        "pageNum":1,        // 页码数
+        "pageSize":"10"     // 页大小
+         */
+    -->
+    <select id="findNewsPage" resultMap="headlinePage">
+        SELECT hid, title, type, page_views, TIMESTAMPDIFF(HOUR, create_time, NOW()) AS past_hours,publisher
+        FROM news_headline
+        WHERE is_deleted = 0
+        <if test="type != 0">
+            AND type = #{type}
+        </if>
+        <if test="keyWords != null and keyWords != ''">
+            AND title like '%' #{keyWords} '%'
+        </if>
+        ORDER BY create_time ASC, page_views DESC
+    </select>
+
+    <select id="findNewsNum" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM news_headline
+        where is_deleted = 0
+        <if test="type != 0">
+            AND type = #{type}
+        </if>
+        <if test="keyWords != null and keyWords != ''">
+            AND title like '%' #{keyWords} '%'
+        </if>
+    </select>
+
+    <select id="showHeadlineDetail" resultMap="headlineDetail">
+        SELECT h.hid, h.title, h.article, h.type, t.tname, h.page_views,
+               TIMESTAMPDIFF(HOUR, create_time, NOW()) AS past_hours,
+               h.publisher, u.nick_name
+        FROM news_headline AS h, news_type AS t, news_user AS u
+        WHERE h.type = t.tid
+          AND h.publisher = u.uid
+          AND h.hid = #{hid};
+    </select>
+
+    <update id="increasePageViews">
+        UPDATE news_headline SET page_views = page_views + 1
+        WHERE hid = #{hid};
+    </update>
+
+    <insert id="addHeadline">
+        INSERT INTO news_headline(title, article, type, publisher, page_views, create_time, update_time, is_deleted)
+        VALUES(#{title}, #{article}, #{type}, #{publisher}, 0, NOW(), NOW(), 0);
+    </insert>
+
+    <select id="findHeadlineByHid" resultMap="newsHeadline">
+        SELECT hid, title, article, type
+        FROM news_headline
+        WHERE hid = #{hid};
+    </select>
+
+    <update id="update">
+        UPDATE news_headline
+        SET title = #{title},
+            article = #{article},
+            type = #{type},
+            update_time = NOW()
+        WHERE hid = #{hid};
+    </update>
+
+    <update id="removeByHid">
+        UPDATE news_headline
+        SET is_deleted = 1
+        WHERE hid = #{hid};
+    </update>
+</mapper>

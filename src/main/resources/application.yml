@@ -16,5 +16,8 @@ mybatis:
     auto-mapping-behavior: full
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
-  type-aliases-package: com.phil.pojo
+  type-aliases-package: com.phil.headline.pojo
   mapper-locations: classpath:/mapper/*.xml
+
+server:
+  port: 80
