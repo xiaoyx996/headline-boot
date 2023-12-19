@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 /**
  * @author Admin
  * @version 1.0
@@ -33,16 +35,8 @@ public class NewsUserServiceImpl implements NewsUserService {
     }
 
     @Override
-    public int addUser(NewsUser registUser) {
-        int count = 0;
-        try {
-            count = newsUserMapper.addUser(registUser);
-            // 提交事务
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        finally {
-            return count;
-        }
+    public int addUser(NewsUser registUser){
+        int count  = newsUserMapper.addUser(registUser);
+        return count;
     }
 }

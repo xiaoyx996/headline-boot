@@ -1,6 +1,9 @@
 package com.phil.headline.service;
 
 import com.phil.headline.pojo.NewsUser;
+import org.apache.ibatis.jdbc.SQL;
+
+import java.sql.SQLIntegrityConstraintViolationException;
 
 
 /**

@@ -56,10 +56,10 @@ public class NewsHeadlineServiceImpl implements NewsHeadlineService {
 
         // 按要求生成返回的map
         Map<String, Object> pageInfo = new HashMap<>();
-        Integer pageNum = headlineQueryVo.getPageNum();
-        Integer pageSize = headlineQueryVo.getPageSize();
-        long totalSize = headlinePageVoPageInfo.getTotal();
-        Integer totalPage = headlinePageVoPageInfo.getPages();
+        Integer pageNum = headlinePageVoPageInfo.getPageNum();  // 当前页码
+        Integer pageSize = headlinePageVoPageInfo.getPageSize(); // 每页有多少数据
+        long totalSize = headlinePageVoPageInfo.getTotal();  // 总共有多少数据
+        Integer totalPage = headlinePageVoPageInfo.getPages(); // 总共有多少页
         pageInfo.put("pageNum", pageNum);
         pageInfo.put("pageSize", pageSize);
         pageInfo.put("totalPage", totalPage);

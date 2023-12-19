@@ -13,7 +13,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Version 1.0
  */
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.phil.headline.controller", "com.phil.headline.config", "com.phil.headline.exceptionhandler",
+                                            "com.phil.headline.service", "com.phil.headline.service.impl"})
 @MapperScan("com.phil.headline.mapper")
 public class Main {
     public static void main(String[] args) {

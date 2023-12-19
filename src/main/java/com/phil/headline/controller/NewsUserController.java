@@ -9,6 +9,7 @@ import com.phil.headline.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -89,7 +90,6 @@ public class NewsUserController{
 
     @PostMapping("regist")
     public Result regist(@RequestBody NewsUser registUser){
-        // 设置密文密码
         registUser.setUserPwd(MD5Util.encrypt(registUser.getUserPwd()));
         int count = newsUserService.addUser(registUser);
         Result result = null;
@@ -112,5 +112,10 @@ public class NewsUserController{
             }
         }
        return result;
+    }
+
+    @GetMapping("test")
+    public void test(){
+        System.out.println(1/0);
     }
 }

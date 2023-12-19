@@ -16,5 +16,5 @@ public interface NewsUserMapper {
 
     NewsUser selectByUserId(int uid);
 
-    int addUser(NewsUser registUser)throws Exception;
+    int addUser(NewsUser registUser);
 }
