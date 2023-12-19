@@ -20,22 +20,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class GlobalExceptionHandler {
     /**
      * 违反了数据库的唯一约束条件，插入数据时。具有唯一约束条件的字段值重复。
-     * @return
+     * @return 用户名被占用状态码
      */
     @ExceptionHandler(value = DuplicateKeyException.class)
     @ResponseBody
     public Object handlerDuplicateKeyException(DuplicateKeyException e){
         log.info("GlobalExceptionHandler.handlerDuplicateKeyException");
         log.error(e.getMessage());
-        Result result = Result.build(null, ResultCodeEnum.USERNAME_USED);
-        return result;
+        return Result.build(null, ResultCodeEnum.USERNAME_USED);
     }
 
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public Object handlerException(Exception e){
-        System.out.println("GlobalExceptionHandler.handlerException");
-        e.printStackTrace();
+        log.info("GlobalExceptionHandler.handlerException");
+        log.error(e.getMessage());
         return Result.build(null, ResultCodeEnum.UNKNOW_ERROR);
     }
 }
